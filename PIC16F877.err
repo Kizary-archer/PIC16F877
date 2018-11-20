@@ -1,0 +1,4 @@
+Message[302] C:\MICRO\LAB1\PIC16F877\PIC16F877.ASM 43 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] C:\MICRO\LAB1\PIC16F877\PIC16F877.ASM 52 : Found opcode in column 1. (BSF)
+Warning[203] C:\MICRO\LAB1\PIC16F877\PIC16F877.ASM 53 : Found opcode in column 1. (movwf)
+Warning[203] C:\MICRO\LAB1\PIC16F877\PIC16F877.ASM 60 : Found opcode in column 1. (GOTO)
