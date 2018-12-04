@@ -1,4 +1,4 @@
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  1
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -27,65 +27,81 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000003            00012 STATUS                  equ 0x03
   00000008            00013 PORTD                   equ 0x08
   00000088            00014 TRISD                   equ 0x88
-                      00015 
-                      00016 ;================================================
-                      00017 ; Инициализация констант
+  00000006            00015 PORTB                   equ 0x06
+  00000086            00016 TRISB                   equ 0x86
+                      00017 
                       00018 ;================================================
-                      00019 
-  00000005            00020 RP0                     equ 0x05
-  00000000            00021 C           equ 0x00
-                      00022 
-                      00023 ;================================================
-                      00024 ; Инициализация переменных в памяти данных
+                      00019 ; Инициализация констант
+                      00020 ;================================================
+                      00021 
+  00000005            00022 RP0                     equ 0x05
+  00000000            00023 C           equ 0x00
+                      00024 
                       00025 ;================================================
-                      00026 
+                      00026 ; Инициализация переменных в памяти данных
                       00027 ;================================================
-                      00028 ; Начало программы
+                      00028 
                       00029 ;================================================
-0000                  00030         ORG 0x00
-0000   2801           00031         goto Start
-                      00032 
-0001                  00033 Start:
-0001   018B           00034         clrf INTCON                     ;запрещаем все прерывания
-                      00035 
-                      00036 ;===============================================
-                      00037 ; Настраиваем линии порта PORTD на выход
+                      00030 ; Начало программы
+                      00031 ;================================================
+0000                  00032         ORG 0x00
+0000   2801           00033         goto Start
+                      00034 
+0001                  00035 Start:
+0001   018B           00036         clrf INTCON                     ;запрещаем все прерывания
+                      00037 
                       00038 ;===============================================
-                      00039 
-0002   1683           00040         bsf STATUS, RP0                         ;переходим в банк 1
-                      00041         
-0003   3000           00042         movlw b'00000000'               ;помещаем в аккумулятор число 0 
+                      00039 ; Настраиваем линии порта PORTD на выход
+                      00040 ;===============================================
+                      00041 
+0002   1683           00042         bsf STATUS,RP0                  ;переходим в банк 1
+                      00043         
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0004   0088           00043         movwf TRISD                     ;устанавливаем линии порта 
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  2
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00044                                         ;PortD на выход
-0005   0083           00045         movwf STATUS            ;обнуляем STATUS
-                      00046                         
-                      00047 
-                      00048 ;===============================================
-                      00049 ; Закончили настройку
+0003   0188           00044         CLRF TRISD      
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0004   1406           00045         BSF TRISB,0x00
+                      00046                                         
+0005   1283           00047         BCF STATUS,RP0          ;переходим в банк 0
+                      00048                         
+                      00049 
                       00050 ;===============================================
-                      00051 
+                      00051 ; Закончили настройку
+                      00052 ;===============================================
+                      00053 
 Warning[203]: Found opcode in column 1. (BSF)
-0006   1403           00052 BSF STATUS,C
-Warning[203]: Found opcode in column 1. (movwf)
-0007   0088           00053 movwf PORTD     
-                      00054 
-                      00055                         ;помещаем в аккумулятор число 0
-0008                  00056 LOOP:
+0006   1403           00054 BSF STATUS,C
+Warning[203]: Found opcode in column 1. (BSF)
+0007   1406           00055 BSF PORTB,0x00
+Warning[203]: Found opcode in column 1. (CLRF)
+0008   0188           00056 CLRF PORTD      
                       00057 
-                      00058 
-0008   0D88           00059         RLF PORTD,1
-Warning[203]: Found opcode in column 1. (GOTO)
-0009   2808           00060 GOTO LOOP
+                      00058                         ;помещаем в аккумулятор число 0
+0009                  00059 LOOP:
+                      00060 
                       00061 
-                      00062         End
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  3
+0009   0D88           00062         RLF PORTD,1
+000A   1C06           00063                 BTFSS PORTB,0x00
+000B   280D           00064                         GOTO BUTTONCLICK
+000C   2809           00065         GOTO LOOP
+                      00066 
+000D                  00067 BUTTONCLICK:
+                      00068 
+000D   1C08           00069         BTFSS PORTD,0x00
+000E   2809           00070         GOTO LOOP
+000F   1C03           00071                 BTFSS STATUS,C
+0010   2809           00072                 GOTO LOOP
+0011   1403           00073         BSF STATUS,C
+0012   0D88           00074         RLF PORTD,1
+0013   0008           00075         RETURN
+                      00076 
+                      00077         End
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  3
 
 
 SYMBOL TABLE
@@ -109,6 +125,7 @@ BCLIE                             00000003
 BCLIF                             00000003
 BF                                00000000
 BRGH                              00000002
+BUTTONCLICK                       0000000D
 C                                 00000000
 CCP1CON                           00000017
 CCP1IE                            00000002
@@ -143,13 +160,13 @@ CREN                              00000004
 CSRC                              00000007
 D                                 00000005
 DATA_ADDRESS                      00000005
-DC                                00000001
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  4
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  4
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+DC                                00000001
 D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             0000010D
@@ -181,7 +198,7 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
-LOOP                              00000008
+LOOP                              00000009
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
 NOT_BO                            00000000
@@ -202,13 +219,13 @@ OPTION_REG                        00000081
 P                                 00000004
 PCFG0                             00000000
 PCFG1                             00000001
-PCFG2                             00000002
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  5
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  5
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PCFG2                             00000002
 PCFG3                             00000003
 PCL                               00000002
 PCLATH                            0000000A
@@ -261,13 +278,13 @@ RC8_9                             00000006
 RC9                               00000006
 RCD8                              00000000
 RCEN                              00000003
-RCIE                              00000005
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  6
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  6
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+RCIE                              00000005
 RCIF                              00000005
 RCREG                             0000001A
 RCSTA                             00000018
@@ -320,13 +337,13 @@ T0SE                              00000004
 T1CKPS0                           00000004
 T1CKPS1                           00000005
 T1CON                             00000010
-T1INSYNC                          00000002
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  7
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  7
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+T1INSYNC                          00000002
 T1OSCEN                           00000003
 T1SYNC                            00000002
 T2CKPS0                           00000000
@@ -379,13 +396,13 @@ TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
 TRISD3                            00000003
-TRISD4                            00000004
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  8
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISD4                            00000004
 TRISD5                            00000005
 TRISD6                            00000006
 TRISD7                            00000007
@@ -438,13 +455,13 @@ _LVP_OFF                          00003F7F
 _LVP_ON                           00003FFF
 _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FF7
-_RC_OSC                           00003FFF
-MPASM  5.43                     PIC16F877.ASM   11-20-2018  22:41:00         PAGE  9
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_RC_OSC                           00003FFF
 _WDTE_OFF                         00003FFB
 _WDTE_ON                          00003FFF
 _WDT_OFF                          00003FFB
@@ -460,16 +477,16 @@ __DEBUG                           1
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
-0000 : XXXXXXXXXX------ ---------------- ---------------- ----------------
+0000 : XXXXXXXXXXXXXXXX XXXX------------ ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    10
-Program Memory Words Free:  8182
+Program Memory Words Used:    20
+Program Memory Words Free:  8172
 
 
 Errors   :     0
 Warnings :     3 reported,     0 suppressed
-Messages :     1 reported,     0 suppressed
+Messages :     2 reported,     0 suppressed
 
 

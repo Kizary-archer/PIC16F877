@@ -12,6 +12,8 @@ INTCON			equ 0x0B
 STATUS			equ 0x03
 PORTD			equ 0x08
 TRISD			equ 0x88
+PORTB			equ 0x06
+TRISB			equ 0x86
 
 ;================================================
 ; Инициализация констант
@@ -37,12 +39,12 @@ Start:
 ; Настраиваем линии порта PORTD на выход
 ;===============================================
 
-	bsf STATUS, RP0 			;переходим в банк 1
+	bsf STATUS,RP0			;переходим в банк 1
 	
-	movlw b'00000000'		;помещаем в аккумулятор число 0 
-	movwf TRISD			;устанавливаем линии порта 
-					;PortD на выход
-	movwf STATUS		;обнуляем STATUS
+	CLRF TRISD	
+	BSF TRISB,0x00
+					
+	BCF STATUS,RP0		;переходим в банк 0
 			
 
 ;===============================================
@@ -50,13 +52,25 @@ Start:
 ;===============================================
 
 BSF STATUS,C
-movwf PORTD	
+BSF PORTB,0x00
+CLRF PORTD	
 
 			;помещаем в аккумулятор число 0
 LOOP:
 
 
 	RLF PORTD,1
-GOTO LOOP
+		BTFSS PORTB,0x00
+			GOTO BUTTONCLICK
+	GOTO LOOP
+
+BUTTONCLICK:
+
+	BTFSS PORTD,0x00 ;проверка на 1цу первого светодиода
+	GOTO LOOP
+		BTFSS STATUS,C
+		GOTO LOOP
+	BSF STATUS,C
+	RETURN
 
 	End
