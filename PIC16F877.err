@@ -1,11 +1,8 @@
+Message[302] D:\MAX\PIC16F877\PIC16F877.ASM 43 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] D:\MAX\PIC16F877\PIC16F877.ASM 44 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] D:\MAX\PIC16F877\PIC16F877.ASM 45 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 55 : Found opcode in column 1. (BSF)
-Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 56 : Found opcode in column 1. (BSF)
-Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 57 : Found opcode in column 1. (CLRF)
-Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 58 : Found opcode in column 1. (movlw)
-Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 59 : Found opcode in column 1. (movwf)
-Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 68 : Found opcode in column 1. (GOTO)
-Warning[207] D:\MAX\PIC16F877\PIC16F877.ASM 79 : Found label after column 1. (XOR255)
-Warning[207] D:\MAX\PIC16F877\PIC16F877.ASM 87 : Found label after column 1. (XOR0)
-Warning[205] D:\MAX\PIC16F877\PIC16F877.ASM 95 : Found directive in column 1. (End)
+Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 66 : Found opcode in column 1. (GOTO)
+Warning[207] D:\MAX\PIC16F877\PIC16F877.ASM 89 : Found label after column 1. (XOR255)
+Warning[207] D:\MAX\PIC16F877\PIC16F877.ASM 100 : Found label after column 1. (XOR0)
+Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 111 : Found opcode in column 1. (BSF)
+Warning[203] D:\MAX\PIC16F877\PIC16F877.ASM 112 : Found opcode in column 1. (GOTO)
+Warning[205] D:\MAX\PIC16F877\PIC16F877.ASM 115 : Found directive in column 1. (End)

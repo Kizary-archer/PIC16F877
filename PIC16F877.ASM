@@ -21,11 +21,12 @@ TRISB			equ 0x86
 
 RP0			equ 0x05
 C           equ 0x00
+Z           equ 0x02
 
 ;================================================
 ; »нициализаци€ переменных в пам€ти данных
 ;================================================
-
+LIGHTS_FULL           equ 0x20
 ;================================================
 ; Ќачало программы
 ;================================================
@@ -34,62 +35,81 @@ C           equ 0x00
 
 Start:
 	clrf INTCON			;запрещаем все прерывани€
-
 ;===============================================
 ; Ќастраиваем линии порта PORTD на выход
 ;===============================================
 
 	bsf STATUS,RP0			;переходим в банк 1
-	
 	CLRF TRISD
 	CLRF TRISB	
-;	BSF TRISB,0x00 ;кнопка
-					
-	BCF STATUS,RP0		;переходим в банк 0
-			
-
+;	BSF TRISB,0x00 ;кнопка				
+	BCF STATUS,RP0		;переходим в банк 0	
+		
 ;===============================================
 ; «акончили настройку
 ;===============================================
-
-BSF STATUS,C
-BSF PORTB,0x00
-CLRF PORTD	
-movlw B'11111111'
-movwf PORTB
-
 LOOP:
 
+	BSF STATUS,C
+	CLRF PORTD
+	CLRF LIGHTS_FULL	
+	movlw B'11111111'
+	movwf PORTB
+
+RUNNING_LIGHTS:
 
 	RLF PORTD,1
-	BTFSC PORTB,0x00
-	GOTO BUTTONCLICK
+	GOTO XOR0
+XOR_FALSE:
+	BTFSC PORTB,.0 ;нажатие кнопки
+	GOTO BUTTON_CLICK
+GOTO RUNNING_LIGHTS
 
-GOTO LOOP
+BUTTON_CLICK:
 
-BUTTONCLICK:
-
-	BTFSS PORTD,0x00 ;проверка на 1цу первого светодиода
-	GOTO LOOP
+	BTFSS PORTD,.0 ;проверка горит ли первый светодиод
+	GOTO RUNNING_LIGHTS
 	BTFSC STATUS,C
-	GOTO LOOP
+	GOTO RUNNING_LIGHTS
+	GOTO XOR255
+
+MODIFICATION_LIGHTS:
+
+	BTFSC LIGHTS_FULL,.0
+	GOTO LDEC
 	BSF STATUS,C
-	GOTO LOOP
+	GOTO RUNNING_LIGHTS
+	
+LDEC:
+
+	BCF PORTD,C
+	GOTO RUNNING_LIGHTS
+	
 
  XOR255:
-        MOVF      PORTD,W   ; копировать из KLOP в W
-        BCF       STATUS,Z ; опустим флаг Z в ноль
-        XORLW     .255     ; проводим сравнение с числом 255(все светодиоды гор€т)
-        BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+
+    MOVF      PORTD,W   ; копировать из PORTD в W
+    BCF       STATUS,Z ; опустим флаг Z в ноль
+    XORLW     .255     ; проводим сравнение с числом 255(все светодиоды гор€т)
+    BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+	GOTO DEC_LIGHTS
+	GOTO MODIFICATION_LIGHTS
 
 ; если Z=1, то выполн€етс€ следующа€ инструкци€, иначе Ц пропускаетс€
 
  XOR0:
-        MOVF      PORTD,W   ; копировать из KLOP в W
-        BCF       STATUS,Z ; опустим флаг Z в ноль
-        XORLW     .255     ; проводим сравнение с числом 255(все светодиоды гор€т)
-        BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
 
-; если Z=1, то выполн€етс€ следующа€ инструкци€, иначе Ц пропускаетс€
+    MOVF      PORTD,W   ; копировать из PORTD в W
+    BCF       STATUS,Z ; опустим флаг Z в ноль
+    XORLW     .0     ; проводим сравнение с числом 0(все светодиоды погасли)
+    BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+	GOTO LOOP
+	GOTO XOR_FALSE
+
+DEC_LIGHTS:
+
+BSF LIGHTS_FULL,.0
+GOTO MODIFICATION_LIGHTS
+
 
 End

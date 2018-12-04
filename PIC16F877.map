@@ -1,30 +1,35 @@
 MPLINK 4.41, Linker
-Linker Map File - Created Tue Dec 04 21:42:21 2018
+Linker Map File - Created Wed Dec 05 00:23:49 2018
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x00003a
+                   .org_1       code   0x000000    program   0x000052
 
 
 
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x00001c      
-            29 out of 8454 program addresses used, program memory utilization is 0%
+                            0x000000    0x000028      
+            41 out of 8454 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-              BUTTONCLICK   0x00000f    program     static D:\Max\PIC16F877\PIC16F877.ASM
-                     LOOP   0x00000b    program     static D:\Max\PIC16F877\PIC16F877.ASM
+             BUTTON_CLICK   0x000010    program     static D:\Max\PIC16F877\PIC16F877.ASM
+               DEC_LIGHTS   0x000027    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     LDEC   0x000019    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     LOOP   0x000006    program     static D:\Max\PIC16F877\PIC16F877.ASM
+      MODIFICATION_LIGHTS   0x000015    program     static D:\Max\PIC16F877\PIC16F877.ASM
+           RUNNING_LIGHTS   0x00000b    program     static D:\Max\PIC16F877\PIC16F877.ASM
                     Start   0x000001    program     static D:\Max\PIC16F877\PIC16F877.ASM
-                     XOR0   0x000019    program     static D:\Max\PIC16F877\PIC16F877.ASM
-                   XOR255   0x000015    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     XOR0   0x000021    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                   XOR255   0x00001b    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                XOR_FALSE   0x00000d    program     static D:\Max\PIC16F877\PIC16F877.ASM
 
 
 
@@ -32,9 +37,14 @@ Linker Map File - Created Tue Dec 04 21:42:21 2018
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
                     Start   0x000001    program     static D:\Max\PIC16F877\PIC16F877.ASM
-                     LOOP   0x00000b    program     static D:\Max\PIC16F877\PIC16F877.ASM
-              BUTTONCLICK   0x00000f    program     static D:\Max\PIC16F877\PIC16F877.ASM
-                   XOR255   0x000015    program     static D:\Max\PIC16F877\PIC16F877.ASM
-                     XOR0   0x000019    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     LOOP   0x000006    program     static D:\Max\PIC16F877\PIC16F877.ASM
+           RUNNING_LIGHTS   0x00000b    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                XOR_FALSE   0x00000d    program     static D:\Max\PIC16F877\PIC16F877.ASM
+             BUTTON_CLICK   0x000010    program     static D:\Max\PIC16F877\PIC16F877.ASM
+      MODIFICATION_LIGHTS   0x000015    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     LDEC   0x000019    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                   XOR255   0x00001b    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     XOR0   0x000021    program     static D:\Max\PIC16F877\PIC16F877.ASM
+               DEC_LIGHTS   0x000027    program     static D:\Max\PIC16F877\PIC16F877.ASM
 
 
