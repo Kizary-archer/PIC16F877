@@ -1,36 +1,40 @@
 MPLINK 4.41, Linker
-Linker Map File - Created Tue Dec 04 15:27:32 2018
+Linker Map File - Created Tue Dec 04 21:42:21 2018
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x000028
+                   .org_1       code   0x000000    program   0x00003a
 
 
 
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000013      
-            20 out of 8454 program addresses used, program memory utilization is 0%
+                            0x000000    0x00001c      
+            29 out of 8454 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-              BUTTONCLICK   0x00000d    program     static D:\PIC16F877\PIC16F877.ASM
-                     LOOP   0x000009    program     static D:\PIC16F877\PIC16F877.ASM
-                    Start   0x000001    program     static D:\PIC16F877\PIC16F877.ASM
+              BUTTONCLICK   0x00000f    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     LOOP   0x00000b    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                    Start   0x000001    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     XOR0   0x000019    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                   XOR255   0x000015    program     static D:\Max\PIC16F877\PIC16F877.ASM
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                    Start   0x000001    program     static D:\PIC16F877\PIC16F877.ASM
-                     LOOP   0x000009    program     static D:\PIC16F877\PIC16F877.ASM
-              BUTTONCLICK   0x00000d    program     static D:\PIC16F877\PIC16F877.ASM
+                    Start   0x000001    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     LOOP   0x00000b    program     static D:\Max\PIC16F877\PIC16F877.ASM
+              BUTTONCLICK   0x00000f    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                   XOR255   0x000015    program     static D:\Max\PIC16F877\PIC16F877.ASM
+                     XOR0   0x000019    program     static D:\Max\PIC16F877\PIC16F877.ASM
 
 

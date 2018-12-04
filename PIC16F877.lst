@@ -1,4 +1,4 @@
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  1
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,51 +57,81 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002   1683           00042         bsf STATUS,RP0                  ;переходим в банк 1
                       00043         
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  2
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0003   0188           00044         CLRF TRISD      
+0003   0188           00044         CLRF TRISD
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0004   1406           00045         BSF TRISB,0x00
-                      00046                                         
-0005   1283           00047         BCF STATUS,RP0          ;переходим в банк 0
-                      00048                         
-                      00049 
-                      00050 ;===============================================
-                      00051 ; Закончили настройку
-                      00052 ;===============================================
-                      00053 
+0004   0186           00045         CLRF TRISB      
+                      00046 ;       BSF TRISB,0x00 ;кнопка
+                      00047                                         
+0005   1283           00048         BCF STATUS,RP0          ;переходим в банк 0
+                      00049                         
+                      00050 
+                      00051 ;===============================================
+                      00052 ; Закончили настройку
+                      00053 ;===============================================
+                      00054 
 Warning[203]: Found opcode in column 1. (BSF)
-0006   1403           00054 BSF STATUS,C
+0006   1403           00055 BSF STATUS,C
 Warning[203]: Found opcode in column 1. (BSF)
-0007   1406           00055 BSF PORTB,0x00
+0007   1406           00056 BSF PORTB,0x00
 Warning[203]: Found opcode in column 1. (CLRF)
-0008   0188           00056 CLRF PORTD      
-                      00057 
-                      00058                         ;помещаем в аккумулятор число 0
-0009                  00059 LOOP:
+0008   0188           00057 CLRF PORTD      
+Warning[203]: Found opcode in column 1. (movlw)
+0009   30FF           00058 movlw B'11111111'
+Warning[203]: Found opcode in column 1. (movwf)
+000A   0086           00059 movwf PORTB
                       00060 
-                      00061 
-0009   0D88           00062         RLF PORTD,1
-000A   1C06           00063                 BTFSS PORTB,0x00
-000B   280D           00064                         GOTO BUTTONCLICK
-000C   2809           00065         GOTO LOOP
-                      00066 
-000D                  00067 BUTTONCLICK:
-                      00068 
-000D   1C08           00069         BTFSS PORTD,0x00
-000E   2809           00070         GOTO LOOP
-000F   1C03           00071                 BTFSS STATUS,C
-0010   2809           00072                 GOTO LOOP
-0011   1403           00073         BSF STATUS,C
-0012   0D88           00074         RLF PORTD,1
-0013   0008           00075         RETURN
-                      00076 
-                      00077         End
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  3
+000B                  00061 LOOP:
+                      00062 
+                      00063 
+000B   0D88           00064         RLF PORTD,1
+000C   1806           00065         BTFSC PORTB,0x00
+000D   280F           00066         GOTO BUTTONCLICK
+                      00067 
+Warning[203]: Found opcode in column 1. (GOTO)
+000E   280B           00068 GOTO LOOP
+                      00069 
+000F                  00070 BUTTONCLICK:
+                      00071 
+000F   1C08           00072         BTFSS PORTD,0x00 ;проверка на 1цу первого светодиода
+0010   280B           00073         GOTO LOOP
+0011   1803           00074         BTFSC STATUS,C
+0012   280B           00075         GOTO LOOP
+0013   1403           00076         BSF STATUS,C
+0014   280B           00077         GOTO LOOP
+                      00078 
+Warning[207]: Found label after column 1. (XOR255)
+0015                  00079  XOR255:
+0015   0808           00080         MOVF      PORTD,W   ; копировать из KLOP в W
+0016   1103           00081         BCF       STATUS,Z ; опустим флаг Z в ноль
+0017   3AFF           00082         XORLW     .255     ; проводим сравнение с числом 255(все светодиоды горят)
+0018   1903           00083         BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+                      00084 
+                      00085 ; если Z=1, то выполняется следующая инструкция, иначе – пропускается
+                      00086 
+Warning[207]: Found label after column 1. (XOR0)
+0019                  00087  XOR0:
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0019   0808           00088         MOVF      PORTD,W   ; копировать из KLOP в W
+001A   1103           00089         BCF       STATUS,Z ; опустим флаг Z в ноль
+001B   3AFF           00090         XORLW     .255     ; проводим сравнение с числом 255(все светодиоды горят)
+001C   1903           00091         BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+                      00092 
+                      00093 ; если Z=1, то выполняется следующая инструкция, иначе – пропускается
+                      00094 
+Warning[205]: Found directive in column 1. (End)
+                      00095 End
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  4
 
 
 SYMBOL TABLE
@@ -125,7 +155,7 @@ BCLIE                             00000003
 BCLIF                             00000003
 BF                                00000000
 BRGH                              00000002
-BUTTONCLICK                       0000000D
+BUTTONCLICK                       0000000F
 C                                 00000000
 CCP1CON                           00000017
 CCP1IE                            00000002
@@ -160,7 +190,7 @@ CREN                              00000004
 CSRC                              00000007
 D                                 00000005
 DATA_ADDRESS                      00000005
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  4
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  5
 
 
 SYMBOL TABLE
@@ -198,7 +228,7 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
-LOOP                              00000009
+LOOP                              0000000B
 NOT_A                             00000005
 NOT_ADDRESS                       00000005
 NOT_BO                            00000000
@@ -219,7 +249,7 @@ OPTION_REG                        00000081
 P                                 00000004
 PCFG0                             00000000
 PCFG1                             00000001
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  5
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  6
 
 
 SYMBOL TABLE
@@ -278,7 +308,7 @@ RC8_9                             00000006
 RC9                               00000006
 RCD8                              00000000
 RCEN                              00000003
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  6
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  7
 
 
 SYMBOL TABLE
@@ -337,7 +367,7 @@ T0SE                              00000004
 T1CKPS0                           00000004
 T1CKPS1                           00000005
 T1CON                             00000010
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  7
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  8
 
 
 SYMBOL TABLE
@@ -396,7 +426,7 @@ TRISD0                            00000000
 TRISD1                            00000001
 TRISD2                            00000002
 TRISD3                            00000003
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  8
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE  9
 
 
 SYMBOL TABLE
@@ -426,6 +456,8 @@ WCOL                              00000007
 WR                                00000001
 WREN                              00000002
 WRERR                             00000003
+XOR0                              00000019
+XOR255                            00000015
 Z                                 00000002
 _BODEN_OFF                        00003FBF
 _BODEN_ON                         00003FFF
@@ -453,14 +485,14 @@ _IDLOC3                           00002003
 _LP_OSC                           00003FFC
 _LVP_OFF                          00003F7F
 _LVP_ON                           00003FFF
-_PWRTE_OFF                        00003FFF
-_PWRTE_ON                         00003FF7
-MPASM  5.43                     PIC16F877.ASM   12-4-2018  15:27:30         PAGE  9
+MPASM  5.43                     PIC16F877.ASM   12-4-2018  21:42:20         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+_PWRTE_OFF                        00003FFF
+_PWRTE_ON                         00003FF7
 _RC_OSC                           00003FFF
 _WDTE_OFF                         00003FFB
 _WDTE_ON                          00003FFF
@@ -477,16 +509,16 @@ __DEBUG                           1
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
 
-0000 : XXXXXXXXXXXXXXXX XXXX------------ ---------------- ----------------
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXX--- ---------------- ----------------
 
 All other memory blocks unused.
 
-Program Memory Words Used:    20
-Program Memory Words Free:  8172
+Program Memory Words Used:    29
+Program Memory Words Free:  8163
 
 
 Errors   :     0
-Warnings :     3 reported,     0 suppressed
+Warnings :     9 reported,     0 suppressed
 Messages :     2 reported,     0 suppressed
 
 

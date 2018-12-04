@@ -41,8 +41,9 @@ Start:
 
 	bsf STATUS,RP0			;переходим в банк 1
 	
-	CLRF TRISD	
-	BSF TRISB,0x00
+	CLRF TRISD
+	CLRF TRISB	
+;	BSF TRISB,0x00 ;кнопка
 					
 	BCF STATUS,RP0		;переходим в банк 0
 			
@@ -54,23 +55,41 @@ Start:
 BSF STATUS,C
 BSF PORTB,0x00
 CLRF PORTD	
+movlw B'11111111'
+movwf PORTB
 
-			;помещаем в аккумулятор число 0
 LOOP:
 
 
 	RLF PORTD,1
-		BTFSS PORTB,0x00
-			GOTO BUTTONCLICK
-	GOTO LOOP
+	BTFSC PORTB,0x00
+	GOTO BUTTONCLICK
+
+GOTO LOOP
 
 BUTTONCLICK:
 
 	BTFSS PORTD,0x00 ;проверка на 1цу первого светодиода
 	GOTO LOOP
-		BTFSS STATUS,C
-		GOTO LOOP
+	BTFSC STATUS,C
+	GOTO LOOP
 	BSF STATUS,C
-	RETURN
+	GOTO LOOP
 
-	End
+ XOR255:
+        MOVF      PORTD,W   ; копировать из KLOP в W
+        BCF       STATUS,Z ; опустим флаг Z в ноль
+        XORLW     .255     ; проводим сравнение с числом 255(все светодиоды горят)
+        BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+
+; если Z=1, то выполняется следующая инструкция, иначе – пропускается
+
+ XOR0:
+        MOVF      PORTD,W   ; копировать из KLOP в W
+        BCF       STATUS,Z ; опустим флаг Z в ноль
+        XORLW     .255     ; проводим сравнение с числом 255(все светодиоды горят)
+        BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
+
+; если Z=1, то выполняется следующая инструкция, иначе – пропускается
+
+End
