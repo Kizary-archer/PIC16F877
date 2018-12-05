@@ -1,0 +1,60 @@
+MPLINK 4.41, Linker
+Linker Map File - Created Wed Dec 05 22:42:10 2018
+
+                                 Section Info
+                  Section       Type    Address   Location Size(Bytes)
+                ---------  ---------  ---------  ---------  ---------
+                   .org_0       code   0x000000    program   0x000000
+                   .org_1       code   0x000000    program   0x000068
+.config_2007_PIC16F877A.O       code   0x002007    program   0x000002
+
+
+
+                              Program Memory Usage 
+                               Start         End      
+                           ---------   ---------      
+                            0x000000    0x000033      
+                            0x002007    0x002007      
+            53 out of 8454 program addresses used, program memory utilization is 0%
+
+
+
+                              Symbols - Sorted by Name
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+             BUTTON_CLICK   0x00000f    program     static F:\PIC16F877A\PIC16F877A.ASM
+               DEC_LIGHTS   0x000026    program     static F:\PIC16F877A\PIC16F877A.ASM
+                     LDEC   0x000018    program     static F:\PIC16F877A\PIC16F877A.ASM
+                     LOOP   0x000006    program     static F:\PIC16F877A\PIC16F877A.ASM
+      MODIFICATION_LIGHTS   0x000014    program     static F:\PIC16F877A\PIC16F877A.ASM
+           RUNNING_LIGHTS   0x00000a    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    Start   0x000001    program     static F:\PIC16F877A\PIC16F877A.ASM
+                     XOR0   0x000020    program     static F:\PIC16F877A\PIC16F877A.ASM
+               XOR0_FALSE   0x00000c    program     static F:\PIC16F877A\PIC16F877A.ASM
+                   XOR255   0x00001a    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    delay   0x000028    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    loop0   0x00002b    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    loop1   0x00002c    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    loop2   0x00002d    program     static F:\PIC16F877A\PIC16F877A.ASM
+
+
+
+                              Symbols - Sorted by Address
+                     Name    Address   Location    Storage File                     
+                ---------  ---------  ---------  --------- ---------                
+                    Start   0x000001    program     static F:\PIC16F877A\PIC16F877A.ASM
+                     LOOP   0x000006    program     static F:\PIC16F877A\PIC16F877A.ASM
+           RUNNING_LIGHTS   0x00000a    program     static F:\PIC16F877A\PIC16F877A.ASM
+               XOR0_FALSE   0x00000c    program     static F:\PIC16F877A\PIC16F877A.ASM
+             BUTTON_CLICK   0x00000f    program     static F:\PIC16F877A\PIC16F877A.ASM
+      MODIFICATION_LIGHTS   0x000014    program     static F:\PIC16F877A\PIC16F877A.ASM
+                     LDEC   0x000018    program     static F:\PIC16F877A\PIC16F877A.ASM
+                   XOR255   0x00001a    program     static F:\PIC16F877A\PIC16F877A.ASM
+                     XOR0   0x000020    program     static F:\PIC16F877A\PIC16F877A.ASM
+               DEC_LIGHTS   0x000026    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    delay   0x000028    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    loop0   0x00002b    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    loop1   0x00002c    program     static F:\PIC16F877A\PIC16F877A.ASM
+                    loop2   0x00002d    program     static F:\PIC16F877A\PIC16F877A.ASM
+
+
