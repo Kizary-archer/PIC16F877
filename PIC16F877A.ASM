@@ -2,8 +2,8 @@
 ;================================================
 ; Настройка и конфигурация микроконтроллера
 ;================================================
-	LIST  p=16F877
-	#include <p16F877.inc> 
+	#include <p16F877a.inc>  
+	__CONFIG _HS_OSC & _WDT_OFF & _PWRTE_ON & _BODEN_ON & _LVP_OFF & _CPD_OFF& _CP_OFF
 ;================================================
 ; Инициализация регистров специального назначения
 ;================================================
@@ -27,6 +27,9 @@ Z           equ 0x02
 ; Инициализация переменных в памяти данных
 ;================================================
 LIGHTS_FULL           equ 0x20
+count0 equ 25h	; задаём символьные обозначение ячеек памяти, расположенных по адресам 25h, 26h, 27h 
+count1 equ 26h
+count2 equ 27h
 ;================================================
 ; Начало программы
 ;================================================
@@ -41,8 +44,9 @@ Start:
 
 	bsf STATUS,RP0			;переходим в банк 1
 	CLRF TRISD
-	CLRF TRISB	
-;	BSF TRISB,0x00 ;кнопка				
+;	CLRF TRISB	
+	BSF TRISB,0x06 ;кнопка	
+	BSF TRISB,0x07 ;кнопка			
 	BCF STATUS,RP0		;переходим в банк 0	
 		
 ;===============================================
@@ -52,18 +56,19 @@ LOOP:
 
 	BSF STATUS,C
 	CLRF PORTD
+	CLRF PORTB
 	CLRF LIGHTS_FULL	
-	movlw B'11111111'
-	movwf PORTB
+;	movlw B'11111111'
+;	movwf PORTB
 
 RUNNING_LIGHTS:
 
 	RLF PORTD,1
 	GOTO XOR0
-XOR_FALSE:
-	BTFSC PORTB,.0 ;нажатие кнопки
+XOR0_FALSE:
+	BTFSS PORTB,0x06 ;нажатие кнопки
 	GOTO BUTTON_CLICK
-GOTO RUNNING_LIGHTS
+GOTO delay
 
 BUTTON_CLICK:
 
@@ -78,12 +83,12 @@ MODIFICATION_LIGHTS:
 	BTFSC LIGHTS_FULL,.0
 	GOTO LDEC
 	BSF STATUS,C
-	GOTO RUNNING_LIGHTS
+	GOTO delay
 	
 LDEC:
 
 	BCF PORTD,C
-	GOTO RUNNING_LIGHTS
+	GOTO delay
 	
 
  XOR255:
@@ -104,12 +109,30 @@ LDEC:
     XORLW     .0     ; проводим сравнение с числом 0(все светодиоды погасли)
     BTFSC     STATUS,Z ; делаем бит-проверку Z-флага
 	GOTO LOOP
-	GOTO XOR_FALSE
+	GOTO XOR0_FALSE
 
 DEC_LIGHTS:
 
 BSF LIGHTS_FULL,.0
 GOTO MODIFICATION_LIGHTS
+
+delay:				;подпрограмма задержки
+	MOVLW 0xd
+	MOVWF count0
+	MOVLW 0xff
+loop0:
+		MOVWF count1
+	loop1:
+			MOVWF count2
+		loop2:
+			DECFSZ count2,F
+			GOTO loop2 ; переход на метку loop2
+
+		DECFSZ count1,F
+		GOTO loop1
+	DECFSZ count0,F
+	GOTO loop0
+GOTO RUNNING_LIGHTS
 
 
 End

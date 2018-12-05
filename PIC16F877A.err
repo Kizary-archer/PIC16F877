@@ -1,0 +1,12 @@
+Message[302] E:\PIC16F877A\PIC16F877A.ASM 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PIC16F877A\PIC16F877A.ASM 48 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\PIC16F877A\PIC16F877A.ASM 49 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[203] E:\PIC16F877A\PIC16F877A.ASM 71 : Found opcode in column 1. (GOTO)
+Warning[207] E:\PIC16F877A\PIC16F877A.ASM 94 : Found label after column 1. (XOR255)
+Warning[207] E:\PIC16F877A\PIC16F877A.ASM 105 : Found label after column 1. (XOR0)
+Warning[203] E:\PIC16F877A\PIC16F877A.ASM 116 : Found opcode in column 1. (BSF)
+Warning[203] E:\PIC16F877A\PIC16F877A.ASM 117 : Found opcode in column 1. (GOTO)
+Warning[207] E:\PIC16F877A\PIC16F877A.ASM 125 : Found label after column 1. (loop1)
+Warning[207] E:\PIC16F877A\PIC16F877A.ASM 127 : Found label after column 1. (loop2)
+Warning[203] E:\PIC16F877A\PIC16F877A.ASM 135 : Found opcode in column 1. (GOTO)
+Warning[205] E:\PIC16F877A\PIC16F877A.ASM 138 : Found directive in column 1. (End)
