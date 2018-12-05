@@ -1,4 +1,4 @@
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  1
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00042 ; Настраиваем линии порта PORTD на выход
                       00043 ;===============================================
                       00044 
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  2
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -66,112 +66,108 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002   1683           00045         bsf STATUS,RP0                  ;переходим в банк 1
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0003   0188           00046         CLRF TRISD
-                      00047 ;       CLRF TRISB      
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0004   1706           00048         BSF TRISB,.6 ;кнопка                            
-0005   1283           00049         BCF STATUS,RP0          ;переходим в банк 0     
-                      00050                 
-                      00051 ;===============================================
-                      00052 ; Закончили настройку
-                      00053 ;===============================================
-0006                  00054 LOOP:
-                      00055 
-0006   1403           00056         BSF STATUS,C
-0007   0188           00057         CLRF PORTD
-0008   0186           00058         CLRF PORTB
-0009   01A0           00059         CLRF LIGHTS_FULL        
-                      00060 
-000A                  00061 RUNNING_LIGHTS:
-                      00062 
-000A   0D88           00063         RLF PORTD,1
-000B   2820           00064         GOTO XOR0
-000C                  00065 XOR0_FALSE:
-000C   1F06           00066         BTFSS PORTB,.6 ;нажатие кнопки
-000D   280F           00067         GOTO BUTTON_CLICK
-Warning[203]: Found opcode in column 1. (GOTO)
-000E   2828           00068 GOTO delay
-                      00069 
-000F                  00070 BUTTON_CLICK:
-                      00071 
-000F   1C08           00072         BTFSS PORTD,.0 ;проверка горит ли первый светодиод
-0010   280A           00073         GOTO RUNNING_LIGHTS
-0011   1803           00074         BTFSC STATUS,C
-0012   280A           00075         GOTO RUNNING_LIGHTS
-0013   281A           00076         GOTO XOR255
-                      00077 
-0014                  00078 MODIFICATION_LIGHTS:
-                      00079 
-0014   1820           00080         BTFSC LIGHTS_FULL,.0
-0015   2818           00081         GOTO LDEC
-0016   1403           00082         BSF STATUS,C
-0017   2828           00083         GOTO delay
-                      00084         
-0018                  00085 LDEC:
-                      00086 
-0018   1008           00087         BCF PORTD,C
-0019   2828           00088         GOTO delay
-                      00089         
-                      00090 
+0004   1706           00047         BSF TRISB,.6 ;кнопка                            
+0005   1283           00048         BCF STATUS,RP0          ;переходим в банк 0     
+                      00049                 
+                      00050 ;===============================================
+                      00051 ; Закончили настройку
+                      00052 ;===============================================
+0006                  00053 LOOP:
+                      00054 
+0006   1403           00055         BSF STATUS,C
+0007   0188           00056         CLRF PORTD
+0008   0186           00057         CLRF PORTB
+0009   01A0           00058         CLRF LIGHTS_FULL        
+                      00059 
+000A                  00060 RUNNING_LIGHTS:
+                      00061 
+000A   0D88           00062         RLF PORTD,1
+000B   2820           00063         GOTO XOR0
+000C                  00064 XOR0_FALSE:
+000C   1F06           00065         BTFSS PORTB,.6 ;нажатие кнопки
+000D   280F           00066         GOTO BUTTON_CLICK
+000E   2828           00067         GOTO delay
+                      00068 
+000F                  00069 BUTTON_CLICK:
+                      00070 
+000F   1C08           00071         BTFSS PORTD,.0 ;проверка горит ли первый светодиод
+0010   280A           00072         GOTO RUNNING_LIGHTS
+0011   1803           00073         BTFSC STATUS,C
+0012   280A           00074         GOTO RUNNING_LIGHTS
+0013   281A           00075         GOTO XOR255
+                      00076 
+0014                  00077 MODIFICATION_LIGHTS:
+                      00078 
+0014   1820           00079         BTFSC LIGHTS_FULL,.0
+0015   2818           00080         GOTO LDEC
+0016   1403           00081         BSF STATUS,C
+0017   2828           00082         GOTO delay
+                      00083         
+0018                  00084 LDEC:
+                      00085 
+0018   1008           00086         BCF PORTD,C
+0019   2828           00087         GOTO delay
+                      00088         
+                      00089 
 Warning[207]: Found label after column 1. (XOR255)
-001A                  00091  XOR255:
-                      00092 
-001A   0808           00093     MOVF PORTD,W   ; копировать из PORTD в W
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  3
+001A                  00090  XOR255:
+                      00091 
+001A   0808           00092     MOVF PORTD,W   ; копировать из PORTD в W
+001B   1103           00093     BCF  STATUS,Z ; опустим флаг Z в ноль
+001C   3AFF           00094     XORLW .255     ; проводим сравнение с числом 255(все светодиоды горят)
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-001B   1103           00094     BCF  STATUS,Z ; опустим флаг Z в ноль
-001C   3AFF           00095     XORLW .255     ; проводим сравнение с числом 255(все светодиоды горят)
-001D   1903           00096     BTFSC  STATUS,Z ; делаем бит-проверку Z-флага
-001E   2826           00097         GOTO DEC_LIGHTS
-001F   2814           00098         GOTO MODIFICATION_LIGHTS
-                      00099 
-                      00100 ; если Z=1, то выполняется следующая инструкция, иначе – пропускается
-                      00101 
+001D   1903           00095     BTFSC  STATUS,Z ; делаем бит-проверку Z-флага
+001E   2826           00096         GOTO DEC_LIGHTS
+001F   2814           00097         GOTO MODIFICATION_LIGHTS
+                      00098 
+                      00099 ; если Z=1, то выполняется следующая инструкция, иначе – пропускается
+                      00100 
 Warning[207]: Found label after column 1. (XOR0)
-0020                  00102  XOR0:
-                      00103 
-0020   0808           00104     MOVF  PORTD,W   ; копировать из PORTD в W
-0021   1103           00105     BCF   STATUS,Z ; опустим флаг Z в ноль
-0022   3A00           00106     XORLW .0     ; проводим сравнение с числом 0(все светодиоды погасли)
-0023   1903           00107     BTFSC STATUS,Z ; делаем бит-проверку Z-флага
-0024   2806           00108         GOTO LOOP
-0025   280C           00109         GOTO XOR0_FALSE
-                      00110 
-0026                  00111 DEC_LIGHTS:
-                      00112 
-Warning[203]: Found opcode in column 1. (BSF)
-0026   1420           00113 BSF LIGHTS_FULL,.0
-Warning[203]: Found opcode in column 1. (GOTO)
-0027   2814           00114 GOTO MODIFICATION_LIGHTS
-                      00115 
-0028                  00116 delay:                          ;подпрограмма задержки
-0028   300D           00117         MOVLW 0xd
-0029   00A5           00118         MOVWF count0
-002A   30FF           00119         MOVLW 0xff
-002B                  00120 loop0:
-002B   00A6           00121                 MOVWF count1
+0020                  00101  XOR0:
+                      00102 
+0020   0808           00103     MOVF  PORTD,W   ; копировать из PORTD в W
+0021   1103           00104     BCF   STATUS,Z ; опустим флаг Z в ноль
+0022   3A00           00105     XORLW .0     ; проводим сравнение с числом 0(все светодиоды погасли)
+0023   1903           00106     BTFSC STATUS,Z ; делаем бит-проверку Z-флага
+0024   2806           00107         GOTO LOOP
+0025   280C           00108         GOTO XOR0_FALSE
+                      00109 
+0026                  00110 DEC_LIGHTS:
+                      00111 
+0026   1420           00112         BSF LIGHTS_FULL,.0
+0027   2814           00113         GOTO MODIFICATION_LIGHTS
+                      00114 
+0028                  00115 delay:                          ;подпрограмма задержки
+0028   300D           00116         MOVLW 0xd
+0029   00A5           00117         MOVWF count0
+002A   30FF           00118         MOVLW 0xff
+002B                  00119 loop0:
+002B   00A6           00120                 MOVWF count1
 Warning[207]: Found label after column 1. (loop1)
-002C                  00122         loop1:
-002C   00A7           00123                         MOVWF count2
+002C                  00121         loop1:
+002C   00A7           00122                         MOVWF count2
 Warning[207]: Found label after column 1. (loop2)
-002D                  00124                 loop2:
-002D   0BA7           00125                         DECFSZ count2,F
-002E   282D           00126                         GOTO loop2 ; переход на метку loop2
-                      00127 
-002F   0BA6           00128                 DECFSZ count1,F
-0030   282C           00129                 GOTO loop1
-0031   0BA5           00130         DECFSZ count0,F
-0032   282B           00131         GOTO loop0
+002D                  00123                 loop2:
+002D   0BA7           00124                         DECFSZ count2,F
+002E   282D           00125                         GOTO loop2 ; переход на метку loop2
+                      00126 
+002F   0BA6           00127                 DECFSZ count1,F
+0030   282C           00128                 GOTO loop1
+0031   0BA5           00129         DECFSZ count0,F
+0032   282B           00130         GOTO loop0
 Warning[203]: Found opcode in column 1. (GOTO)
-0033   280A           00132 GOTO RUNNING_LIGHTS
+0033   280A           00131 GOTO RUNNING_LIGHTS
+                      00132 
                       00133 
-                      00134 
 Warning[205]: Found directive in column 1. (End)
-                      00135 End
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  4
+                      00134 End
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  4
 
 
 SYMBOL TABLE
@@ -230,7 +226,7 @@ CHS0                              00000003
 CHS1                              00000004
 CHS2                              00000005
 CIS                               00000003
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  5
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  5
 
 
 SYMBOL TABLE
@@ -289,7 +285,7 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  6
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  6
 
 
 SYMBOL TABLE
@@ -348,7 +344,7 @@ RA0                               00000000
 RA1                               00000001
 RA2                               00000002
 RA3                               00000003
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  7
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  7
 
 
 SYMBOL TABLE
@@ -407,7 +403,7 @@ S                                 00000003
 SEN                               00000000
 SMP                               00000007
 SPBRG                             00000099
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  8
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  8
 
 
 SYMBOL TABLE
@@ -466,7 +462,7 @@ TRISA0                            00000000
 TRISA1                            00000001
 TRISA2                            00000002
 TRISA3                            00000003
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE  9
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE  9
 
 
 SYMBOL TABLE
@@ -525,7 +521,7 @@ XOR0                              00000020
 XOR0_FALSE                        0000000C
 XOR255                            0000001A
 Z                                 00000002
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE 10
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE 10
 
 
 SYMBOL TABLE
@@ -577,7 +573,7 @@ delay                             00000028
 loop0                             0000002B
 loop1                             0000002C
 loop2                             0000002D
-MPASM  5.43                    PIC16F877A.ASM   12-5-2018  22:42:08         PAGE 11
+MPASM  5.43                    PIC16F877A.ASM   12-5-2018  23:08:20         PAGE 11
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
@@ -593,7 +589,7 @@ Program Memory Words Free:  8140
 
 
 Errors   :     0
-Warnings :     9 reported,     0 suppressed
+Warnings :     6 reported,     0 suppressed
 Messages :     2 reported,     0 suppressed
 
 

@@ -44,7 +44,6 @@ Start:
 
 	bsf STATUS,RP0			;переходим в банк 1
 	CLRF TRISD
-;	CLRF TRISB	
 	BSF TRISB,.6 ;кнопка				
 	BCF STATUS,RP0		;переходим в банк 0	
 		
@@ -65,7 +64,7 @@ RUNNING_LIGHTS:
 XOR0_FALSE:
 	BTFSS PORTB,.6 ;нажатие кнопки
 	GOTO BUTTON_CLICK
-GOTO delay
+	GOTO delay
 
 BUTTON_CLICK:
 
@@ -110,8 +109,8 @@ LDEC:
 
 DEC_LIGHTS:
 
-BSF LIGHTS_FULL,.0
-GOTO MODIFICATION_LIGHTS
+	BSF LIGHTS_FULL,.0
+	GOTO MODIFICATION_LIGHTS
 
 delay:				;подпрограмма задержки
 	MOVLW 0xd
