@@ -27,6 +27,8 @@ Z           equ 0x02
 ; »нициализаци€ переменных в пам€ти данных
 ;================================================
 LIGHTS_FULL   equ 0x20
+;LIGHTS_FULL_WAIT equ 0x21
+;BOOLWAIT equ 0x22
 count0 equ 25h	; задаЄм символьные обозначение €чеек пам€ти, расположенных по адресам 25h, 26h, 27h 
 count1 equ 26h
 count2 equ 27h
@@ -44,7 +46,6 @@ Start:
 
 	bsf STATUS,RP0			;переходим в банк 1
 	CLRF TRISD
-;	CLRF TRISB	
 	BSF TRISB,.6 ;кнопка				
 	BCF STATUS,RP0		;переходим в банк 0	
 		
@@ -52,7 +53,6 @@ Start:
 ; «акончили настройку
 ;===============================================
 LOOP:
-
 	BSF STATUS,C
 	CLRF PORTD
 	CLRF PORTB
@@ -65,7 +65,7 @@ RUNNING_LIGHTS:
 XOR0_FALSE:
 	BTFSS PORTB,.6 ;нажатие кнопки
 	GOTO BUTTON_CLICK
-GOTO delay
+	GOTO delay
 
 BUTTON_CLICK:
 
@@ -94,7 +94,7 @@ LDEC:
     BCF  STATUS,Z ; опустим флаг Z в ноль
     XORLW .255     ; проводим сравнение с числом 255(все светодиоды гор€т)
     BTFSC  STATUS,Z ; делаем бит-проверку Z-флага
-	GOTO DEC_LIGHTS
+	GOTO WAITBUTTON
 	GOTO MODIFICATION_LIGHTS
 
 ; если Z=1, то выполн€етс€ следующа€ инструкци€, иначе Ц пропускаетс€
@@ -110,8 +110,8 @@ LDEC:
 
 DEC_LIGHTS:
 
-BSF LIGHTS_FULL,.0
-GOTO MODIFICATION_LIGHTS
+	BSF LIGHTS_FULL,.0
+	GOTO MODIFICATION_LIGHTS
 
 delay:				;подпрограмма задержки
 	MOVLW 0xd
@@ -131,5 +131,29 @@ loop0:
 	GOTO loop0
 GOTO RUNNING_LIGHTS
 
+delay2:				;подпрограмма задержки
+	MOVLW 0xd
+	MOVWF count0
+	MOVLW 0xff
+lop0:
+		MOVWF count1
+	lop1:
+			MOVWF count2
+		lop2:
+			DECFSZ count2,F
+			GOTO lop2 ; переход на метку loop2
 
+		DECFSZ count1,F
+		GOTO lop1
+	DECFSZ count0,F
+	GOTO lop0
+GOTO del
+
+WAITBUTTON:
+	GOTO delay2
+del:
+	;BSF LIGHTS_FULL_WAIT,.0
+	BTFSS PORTB,.6 ;нажатие кнопки
+	GOTO DEC_LIGHTS
+	GOTO WAITBUTTON
 End
