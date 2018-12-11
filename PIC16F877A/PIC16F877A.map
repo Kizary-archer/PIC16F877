@@ -1,11 +1,15 @@
 MPLINK 4.41, Linker
+<<<<<<< HEAD
 Linker Map File - Created Wed Dec 05 23:08:22 2018
+=======
+Linker Map File - Created Thu Dec 06 17:42:52 2018
+>>>>>>> master
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000000
-                   .org_1       code   0x000000    program   0x000068
+                   .org_1       code   0x000000    program   0x000088
 .config_2007_PIC16F877A.O       code   0x002007    program   0x000002
 
 
@@ -13,15 +17,16 @@ Linker Map File - Created Wed Dec 05 23:08:22 2018
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x000033      
+                            0x000000    0x000043      
                             0x002007    0x002007      
-            53 out of 8454 program addresses used, program memory utilization is 0%
+            69 out of 8454 program addresses used, program memory utilization is 0%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
+<<<<<<< HEAD
              BUTTON_CLICK   0x00000f    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                DEC_LIGHTS   0x000026    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                      LDEC   0x000018    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
@@ -36,12 +41,35 @@ Linker Map File - Created Wed Dec 05 23:08:22 2018
                     loop0   0x00002b    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                     loop1   0x00002c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                     loop2   0x00002d    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+=======
+             BUTTON_CLICK   0x00000f    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+               DEC_LIGHTS   0x000026    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     LDEC   0x000018    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     LOOP   0x000006    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+      MODIFICATION_LIGHTS   0x000014    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+           RUNNING_LIGHTS   0x00000a    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    Start   0x000001    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+               WAITBUTTON   0x000040    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     XOR0   0x000020    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+               XOR0_FALSE   0x00000c    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                   XOR255   0x00001a    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                      del   0x000041    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    delay   0x000028    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                   delay2   0x000034    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    loop0   0x00002b    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    loop1   0x00002c    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    loop2   0x00002d    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     lop0   0x000037    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     lop1   0x000038    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     lop2   0x000039    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+>>>>>>> master
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
+<<<<<<< HEAD
                     Start   0x000001    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                      LOOP   0x000006    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
            RUNNING_LIGHTS   0x00000a    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
@@ -56,5 +84,27 @@ Linker Map File - Created Wed Dec 05 23:08:22 2018
                     loop0   0x00002b    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                     loop1   0x00002c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
                     loop2   0x00002d    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+=======
+                    Start   0x000001    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     LOOP   0x000006    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+           RUNNING_LIGHTS   0x00000a    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+               XOR0_FALSE   0x00000c    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+             BUTTON_CLICK   0x00000f    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+      MODIFICATION_LIGHTS   0x000014    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     LDEC   0x000018    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                   XOR255   0x00001a    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     XOR0   0x000020    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+               DEC_LIGHTS   0x000026    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    delay   0x000028    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    loop0   0x00002b    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    loop1   0x00002c    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                    loop2   0x00002d    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                   delay2   0x000034    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     lop0   0x000037    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     lop1   0x000038    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                     lop2   0x000039    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+               WAITBUTTON   0x000040    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+                      del   0x000041    program     static S:\3641\Fomin_Borzaev\PIC16F877A\PIC16F877A.ASM
+>>>>>>> master
 
 
