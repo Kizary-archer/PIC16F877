@@ -6,37 +6,21 @@ INTCON		equ 0x0B
 C           equ 0x00
 Z           equ 0x02
 
-;================================================
-; Инициализация переменных в памяти данных
-;================================================
 LIGHTS_FULL   equ 0x20
-<<<<<<< HEAD
-=======
-;BOOLWAIT equ 0x22
->>>>>>> master
 count0 equ 25h	; задаём символьные обозначение ячеек памяти, расположенных по адресам 25h, 26h, 27h 
 count1 equ 26h
 count2 equ 27h
-;================================================
-; Начало программы
-;================================================
+
 	ORG 0x00
 	goto Start
 
 Start:
 	clrf INTCON			;запрещаем все прерывания
-;===============================================
-; Настраиваем линии порта PORTD на выход
-;===============================================
-
 	bsf STATUS,RP0			;переходим в банк 1
 	CLRF TRISD
 	BSF TRISB,.6 ;кнопка				
 	BCF STATUS,RP0		;переходим в банк 0	
 		
-;===============================================
-; Закончили настройку
-;===============================================
 LOOP:
 	BSF STATUS,C
 	CLRF PORTD
@@ -71,12 +55,7 @@ LDEC:
 
 	BCF PORTD,C
 	GOTO delay
-
-DEC_LIGHTS:;метка условия уменьшения огоньков
-
-	BSF LIGHTS_FULL,.0
-;	BSF STATUS,C
-	GOTO LDEC
+	
 
  XOR255:
 
@@ -98,12 +77,10 @@ DEC_LIGHTS:;метка условия уменьшения огоньков
 	GOTO LOOP
 	GOTO XOR0_FALSE
 
-WAITBUTTON:
-	GOTO delay2
-del:
-	BTFSS PORTB,.6 ;нажатие кнопки
-	GOTO DEC_LIGHTS
-	GOTO WAITBUTTON
+DEC_LIGHTS:
+
+	BSF LIGHTS_FULL,.0
+	GOTO MODIFICATION_LIGHTS
 
 WAITBUTTON:
 	GOTO delay2
