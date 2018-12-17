@@ -27,8 +27,6 @@ Z           equ 0x02
 ; »нициализаци€ переменных в пам€ти данных
 ;================================================
 LIGHTS_FULL   equ 0x20
-;LIGHTS_FULL_WAIT equ 0x21
-;BOOLWAIT equ 0x22
 count0 equ 25h	; задаЄм символьные обозначение €чеек пам€ти, расположенных по адресам 25h, 26h, 27h 
 count1 equ 26h
 count2 equ 27h
@@ -67,7 +65,7 @@ XOR0_FALSE:
 	GOTO BUTTON_CLICK
 	GOTO delay
 
-BUTTON_CLICK:
+BUTTON_CLICK: ;если кнопка нажата
 
 	BTFSS PORTD,.0 ;проверка горит ли первый светодиод
 	GOTO RUNNING_LIGHTS
@@ -113,6 +111,13 @@ DEC_LIGHTS:
 	BSF LIGHTS_FULL,.0
 	GOTO MODIFICATION_LIGHTS
 
+WAITBUTTON:
+	GOTO delay2
+del:
+	BTFSS PORTB,.6 ;нажатие кнопки
+	GOTO DEC_LIGHTS
+	GOTO WAITBUTTON
+
 delay:				;подпрограмма задержки
 	MOVLW 0xd
 	MOVWF count0
@@ -123,7 +128,7 @@ loop0:
 			MOVWF count2
 		loop2:
 			DECFSZ count2,F
-			GOTO loop2 ; переход на метку loop2
+			GOTO loop2
 
 		DECFSZ count1,F
 		GOTO loop1
@@ -141,7 +146,7 @@ lop0:
 			MOVWF count2
 		lop2:
 			DECFSZ count2,F
-			GOTO lop2 ; переход на метку loop2
+			GOTO lop2 
 
 		DECFSZ count1,F
 		GOTO lop1
@@ -149,11 +154,4 @@ lop0:
 	GOTO lop0
 GOTO del
 
-WAITBUTTON:
-	GOTO delay2
-del:
-	;BSF LIGHTS_FULL_WAIT,.0
-	BTFSS PORTB,.6 ;нажатие кнопки
-	GOTO DEC_LIGHTS
-	GOTO WAITBUTTON
 End
