@@ -10,6 +10,10 @@ Z           equ 0x02
 ; »нициализаци€ переменных в пам€ти данных
 ;================================================
 LIGHTS_FULL   equ 0x20
+<<<<<<< HEAD
+=======
+;BOOLWAIT equ 0x22
+>>>>>>> master
 count0 equ 25h	; задаЄм символьные обозначение €чеек пам€ти, расположенных по адресам 25h, 26h, 27h 
 count1 equ 26h
 count2 equ 27h
@@ -67,7 +71,12 @@ LDEC:
 
 	BCF PORTD,C
 	GOTO delay
-	
+
+DEC_LIGHTS:;метка услови€ уменьшени€ огоньков
+
+	BSF LIGHTS_FULL,.0
+;	BSF STATUS,C
+	GOTO LDEC
 
  XOR255:
 
@@ -89,10 +98,12 @@ LDEC:
 	GOTO LOOP
 	GOTO XOR0_FALSE
 
-DEC_LIGHTS:
-
-	BSF LIGHTS_FULL,.0
-	GOTO MODIFICATION_LIGHTS
+WAITBUTTON:
+	GOTO delay2
+del:
+	BTFSS PORTB,.6 ;нажатие кнопки
+	GOTO DEC_LIGHTS
+	GOTO WAITBUTTON
 
 WAITBUTTON:
 	GOTO delay2

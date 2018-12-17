@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  1
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  1
+>>>>>>> master
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -34,6 +38,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0000                  00019         ORG 0x00
 0000   2801           00020         goto Start
                       00021 
+<<<<<<< HEAD
 0001                  00022 Start:
 0001   018B           00023         clrf INTCON                     ;запрещаем все прерывания
                       00024 ;===============================================
@@ -58,11 +63,38 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
                       00041 
 000A                  00042 RUNNING_LIGHTS:
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  2
+=======
+  00000005            00022 RP0                     equ 0x05
+  00000000            00023 C           equ 0x00
+  00000002            00024 Z           equ 0x02
+                      00025 
+                      00026 ;================================================
+                      00027 ; Инициализация переменных в памяти данных
+                      00028 ;================================================
+  00000020            00029 LIGHTS_FULL   equ 0x20
+                      00030 ;BOOLWAIT equ 0x22
+  00000025            00031 count0 equ 25h  ; задаём символьные обозначение ячеек памяти, расположенных по адресам 25h, 26h, 27h 
+  00000026            00032 count1 equ 26h
+  00000027            00033 count2 equ 27h
+                      00034 ;================================================
+                      00035 ; Начало программы
+                      00036 ;================================================
+0000                  00037         ORG 0x00
+0000   2801           00038         goto Start
+                      00039 
+0001                  00040 Start:
+0001   018B           00041         clrf INTCON                     ;запрещаем все прерывания
+                      00042 ;===============================================
+                      00043 ; Настраиваем линии порта PORTD на выход
+                      00044 ;===============================================
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  2
+>>>>>>> master
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+<<<<<<< HEAD
                       00043 
 000A   0D88           00044         RLF PORTD,1
 000B   2820           00045         GOTO XOR0
@@ -117,11 +149,68 @@ Warning[207]: Found label after column 1. (XOR0)
 0026                  00092 DEC_LIGHTS:
                       00093 
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  3
+=======
+                      00045 
+0002   1683           00046         bsf STATUS,RP0                  ;переходим в банк 1
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0003   0188           00047         CLRF TRISD
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0004   1706           00048         BSF TRISB,.6 ;кнопка                            
+0005   1283           00049         BCF STATUS,RP0          ;переходим в банк 0     
+                      00050                 
+                      00051 ;===============================================
+                      00052 ; Закончили настройку
+                      00053 ;===============================================
+0006                  00054 LOOP:
+0006   1403           00055         BSF STATUS,C
+0007   0188           00056         CLRF PORTD
+0008   0186           00057         CLRF PORTB
+0009   01A0           00058         CLRF LIGHTS_FULL        
+                      00059 
+000A                  00060 RUNNING_LIGHTS:
+                      00061 
+000A   0D88           00062         RLF PORTD,1
+000B   2822           00063         GOTO XOR0
+000C                  00064 XOR0_FALSE:
+000C   1F06           00065         BTFSS PORTB,.6 ;нажатие кнопки
+000D   280F           00066         GOTO BUTTON_CLICK
+000E   282C           00067         GOTO delay
+                      00068 
+000F                  00069 BUTTON_CLICK:
+                      00070 
+000F   1C08           00071         BTFSS PORTD,.0 ;проверка горит ли первый светодиод
+0010   280A           00072         GOTO RUNNING_LIGHTS
+0011   1803           00073         BTFSC STATUS,C
+0012   280A           00074         GOTO RUNNING_LIGHTS
+0013   281C           00075         GOTO XOR255
+                      00076 
+0014                  00077 MODIFICATION_LIGHTS:
+                      00078 
+0014   1820           00079         BTFSC LIGHTS_FULL,.0
+0015   2818           00080         GOTO LDEC
+0016   1403           00081         BSF STATUS,C
+0017   282C           00082         GOTO delay
+                      00083         
+0018                  00084 LDEC:
+                      00085 
+0018   1008           00086         BCF PORTD,C
+0019   282C           00087         GOTO delay
+                      00088 
+001A                  00089 DEC_LIGHTS:;;метка условия уменьшения огоньков
+                      00090 
+001A   1420           00091         BSF LIGHTS_FULL,.0
+                      00092 ;       BSF STATUS,C
+001B   2818           00093         GOTO LDEC
+                      00094 
+Warning[207]: Found label after column 1. (XOR255)
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  3
+>>>>>>> master
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+<<<<<<< HEAD
 0026   1420           00094         BSF LIGHTS_FULL,.0
 0027   2814           00095         GOTO MODIFICATION_LIGHTS
                       00096 
@@ -176,13 +265,92 @@ Warning[203]: Found opcode in column 1. (GOTO)
                       00139 
 Warning[205]: Found directive in column 1. (End)
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  4
+=======
+001C                  00095  XOR255:
+                      00096 
+001C   0808           00097     MOVF PORTD,W   ; копировать из PORTD в W
+001D   1103           00098     BCF  STATUS,Z ; опустим флаг Z в ноль
+001E   3AFF           00099     XORLW .255     ; проводим сравнение с числом 255(все светодиоды горят)
+001F   1903           00100     BTFSC  STATUS,Z ; делаем бит-проверку Z-флага
+0020   2828           00101         GOTO WAITBUTTON
+0021   2814           00102         GOTO MODIFICATION_LIGHTS
+                      00103 
+                      00104 ; если Z=1, то выполняется следующая инструкция, иначе – пропускается
+                      00105 
+Warning[207]: Found label after column 1. (XOR0)
+0022                  00106  XOR0:
+                      00107 
+0022   0808           00108     MOVF  PORTD,W   ; копировать из PORTD в W
+0023   1103           00109     BCF   STATUS,Z ; опустим флаг Z в ноль
+0024   3A00           00110     XORLW .0     ; проводим сравнение с числом 0(все светодиоды погасли)
+0025   1903           00111     BTFSC STATUS,Z ; делаем бит-проверку Z-флага
+0026   2806           00112         GOTO LOOP
+0027   280C           00113         GOTO XOR0_FALSE
+                      00114 
+0028                  00115 WAITBUTTON:
+0028   2838           00116         GOTO delay2
+0029                  00117 del:
+0029   1F06           00118         BTFSS PORTB,.6 ;нажатие кнопки
+002A   281A           00119         GOTO DEC_LIGHTS
+002B   2828           00120         GOTO WAITBUTTON
+                      00121 
+002C                  00122 delay:                          ;подпрограмма задержки
+002C   300D           00123         MOVLW 0xd
+002D   00A5           00124         MOVWF count0
+002E   30FF           00125         MOVLW 0xff
+002F                  00126 loop0:
+002F   00A6           00127                 MOVWF count1
+Warning[207]: Found label after column 1. (loop1)
+0030                  00128         loop1:
+0030   00A7           00129                         MOVWF count2
+Warning[207]: Found label after column 1. (loop2)
+0031                  00130                 loop2:
+0031   0BA7           00131                         DECFSZ count2,F
+0032   2831           00132                         GOTO loop2 ; переход на метку loop2
+                      00133 
+0033   0BA6           00134                 DECFSZ count1,F
+0034   2830           00135                 GOTO loop1
+0035   0BA5           00136         DECFSZ count0,F
+0036   282F           00137         GOTO loop0
+Warning[203]: Found opcode in column 1. (GOTO)
+0037   280A           00138 GOTO RUNNING_LIGHTS
+                      00139 
+0038                  00140 delay2:                         ;подпрограмма задержки
+0038   300D           00141         MOVLW 0xd
+0039   00A5           00142         MOVWF count0
+003A   30FF           00143         MOVLW 0xff
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  4
+>>>>>>> master
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+<<<<<<< HEAD
                       00140 End
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  5
+=======
+003B                  00144 lop0:
+003B   00A6           00145                 MOVWF count1
+Warning[207]: Found label after column 1. (lop1)
+003C                  00146         lop1:
+003C   00A7           00147                         MOVWF count2
+Warning[207]: Found label after column 1. (lop2)
+003D                  00148                 lop2:
+003D   0BA7           00149                         DECFSZ count2,F
+003E   283D           00150                         GOTO lop2 ; переход на метку loop2
+                      00151 
+003F   0BA6           00152                 DECFSZ count1,F
+0040   283C           00153                 GOTO lop1
+0041   0BA5           00154         DECFSZ count0,F
+0042   283B           00155         GOTO lop0
+Warning[203]: Found opcode in column 1. (GOTO)
+0043   2829           00156 GOTO del
+                      00157 
+Warning[205]: Found directive in column 1. (End)
+                      00158 End
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  5
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -241,7 +409,11 @@ CHS0                              00000003
 CHS1                              00000004
 CHS2                              00000005
 CIS                               00000003
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  6
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  6
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -268,7 +440,7 @@ CVRR                              00000005
 D                                 00000005
 DATA_ADDRESS                      00000005
 DC                                00000001
-DEC_LIGHTS                        00000026
+DEC_LIGHTS                        0000001A
 D_A                               00000005
 D_NOT_A                           00000005
 EEADR                             0000010D
@@ -300,7 +472,11 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  7
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  7
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -359,7 +535,11 @@ RA0                               00000000
 RA1                               00000001
 RA2                               00000002
 RA3                               00000003
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  8
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  8
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -418,7 +598,11 @@ S                                 00000003
 SEN                               00000000
 SMP                               00000007
 SPBRG                             00000099
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE  9
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE  9
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -477,7 +661,11 @@ TRISA0                            00000000
 TRISA1                            00000001
 TRISA2                            00000002
 TRISA3                            00000003
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE 10
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE 10
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -533,10 +721,15 @@ WCOL                              00000007
 WR                                00000001
 WREN                              00000002
 WRERR                             00000003
-XOR0                              00000020
+XOR0                              00000022
 XOR0_FALSE                        0000000C
+<<<<<<< HEAD
 XOR255                            0000001A
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE 11
+=======
+XOR255                            0000001C
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE 11
+>>>>>>> master
 
 
 SYMBOL TABLE
@@ -594,7 +787,11 @@ loop2                             00000031
 lop0                              0000003B
 lop1                              0000003C
 lop2                              0000003D
+<<<<<<< HEAD
 MPASM  5.43                    PIC16F877A.ASM   12-17-2018  22:15:38         PAGE 12
+=======
+MPASM  5.43                    PIC16F877A.ASM   12-11-2018  15:09:28         PAGE 12
+>>>>>>> master
 
 
 MEMORY USAGE MAP ('X' = Used,  '-' = Unused)

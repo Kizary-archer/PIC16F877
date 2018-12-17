@@ -1,5 +1,9 @@
 MPLINK 4.41, Linker
+<<<<<<< HEAD
 Linker Map File - Created Mon Dec 17 22:15:40 2018
+=======
+Linker Map File - Created Tue Dec 11 15:09:30 2018
+>>>>>>> master
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -22,6 +26,7 @@ Linker Map File - Created Mon Dec 17 22:15:40 2018
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
+<<<<<<< HEAD
              BUTTON_CLICK   0x00000f    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                DEC_LIGHTS   0x000026    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                      LDEC   0x000018    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
@@ -42,12 +47,35 @@ Linker Map File - Created Mon Dec 17 22:15:40 2018
                      lop0   0x00003b    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                      lop1   0x00003c    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                      lop2   0x00003d    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
+=======
+             BUTTON_CLICK   0x00000f    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+               DEC_LIGHTS   0x00001a    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     LDEC   0x000018    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     LOOP   0x000006    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+      MODIFICATION_LIGHTS   0x000014    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+           RUNNING_LIGHTS   0x00000a    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    Start   0x000001    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+               WAITBUTTON   0x000028    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     XOR0   0x000022    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+               XOR0_FALSE   0x00000c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                   XOR255   0x00001c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                      del   0x000029    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    delay   0x00002c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                   delay2   0x000038    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    loop0   0x00002f    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    loop1   0x000030    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    loop2   0x000031    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     lop0   0x00003b    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     lop1   0x00003c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     lop2   0x00003d    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+>>>>>>> master
 
 
 
                               Symbols - Sorted by Address
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
+<<<<<<< HEAD
                     Start   0x000001    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                      LOOP   0x000006    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
            RUNNING_LIGHTS   0x00000a    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
@@ -68,5 +96,27 @@ Linker Map File - Created Mon Dec 17 22:15:40 2018
                      lop0   0x00003b    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                      lop1   0x00003c    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
                      lop2   0x00003d    program     static E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM
+=======
+                    Start   0x000001    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     LOOP   0x000006    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+           RUNNING_LIGHTS   0x00000a    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+               XOR0_FALSE   0x00000c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+             BUTTON_CLICK   0x00000f    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+      MODIFICATION_LIGHTS   0x000014    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     LDEC   0x000018    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+               DEC_LIGHTS   0x00001a    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                   XOR255   0x00001c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     XOR0   0x000022    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+               WAITBUTTON   0x000028    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                      del   0x000029    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    delay   0x00002c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    loop0   0x00002f    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    loop1   0x000030    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                    loop2   0x000031    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                   delay2   0x000038    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     lop0   0x00003b    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     lop1   0x00003c    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+                     lop2   0x00003d    program     static C:\micro\lab1\PIC16F877\PIC16F877A\PIC16F877A.ASM
+>>>>>>> master
 
 
