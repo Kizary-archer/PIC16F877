@@ -1,11 +1,11 @@
-Message[302] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 46 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[302] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 47 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 89 : Found label after column 1. (XOR255)
-Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 100 : Found label after column 1. (XOR0)
-Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 127 : Found label after column 1. (loop1)
-Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 129 : Found label after column 1. (loop2)
-Warning[203] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 137 : Found opcode in column 1. (GOTO)
-Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 145 : Found label after column 1. (lop1)
-Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 147 : Found label after column 1. (lop2)
-Warning[203] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 155 : Found opcode in column 1. (GOTO)
-Warning[205] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 157 : Found directive in column 1. (End)
+Message[302] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 29 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 30 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 72 : Found label after column 1. (XOR255)
+Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 83 : Found label after column 1. (XOR0)
+Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 110 : Found label after column 1. (loop1)
+Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 112 : Found label after column 1. (loop2)
+Warning[203] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 120 : Found opcode in column 1. (GOTO)
+Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 128 : Found label after column 1. (lop1)
+Warning[207] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 130 : Found label after column 1. (lop2)
+Warning[203] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 138 : Found opcode in column 1. (GOTO)
+Warning[205] E:\MICRO_FIN\PIC16F877A\PIC16F877A.ASM 140 : Found directive in column 1. (End)
